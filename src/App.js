@@ -34,9 +34,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(filteredData);
-  }, [filteredData])
-  useEffect(() => {
     const searchingByName = handleFilterByName(data, filterByName);
     const searchingByFilters = updateTable(allFilters, searchingByName);
     const orderingByColumn = orderedArray(searchingByFilters, order);

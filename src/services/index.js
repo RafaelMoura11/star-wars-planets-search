@@ -51,21 +51,21 @@ export const updateTable = (allFilters, data) => {
   return newTable;
 };
 
-const orderByName = (data, column) => (
+const orderByName = (data) => (
   [...data].sort((a, b) => {
     const menosUm = -1;
-    if (a[column] < b[column]) {
+    if (a.name > b.name) {
       return 1;
     }
-    if (a[column] > b[column]) {
+    if (a.name < b.name) {
       return menosUm;
     }
     return 0;
-  }).reverse()
+  })
 );
 
 export const orderedArray = (data, { column, sort }) => {
-  const seila = orderByName(data, column);
+  const seila = orderByName(data);
   if (column === 'name') {
     return seila;
   }

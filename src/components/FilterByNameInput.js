@@ -1,32 +1,17 @@
 import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
-import { columnFilter } from '../services';
 
 function FilterByPlanet() {
-  const { objectWithStatesAndFunctions: { data,
-    setData,
-    apiResponse,
-    allFilters } } = useContext(MyContext);
+  const { setFilterByName } = useContext(MyContext);
 
-  const updateTable = (newArrayOfFilters) => {
-    newArrayOfFilters.forEach(({ column, comparison, value }) => (
-      setData(columnFilter(apiResponse, column, comparison, value))
-    ));
-  };
-
-  const filterByName = ({ target: { value } }) => {
-    if (value === '') {
-      setData([...apiResponse]);
-      return updateTable(allFilters);
-    }
-    const newArrayOfPlanets = data.filter(({ name }) => name.includes(value));
-    setData(newArrayOfPlanets);
+  const handleChange = ({ target: { value } }) => {
+    setFilterByName(value);
   };
 
   return (
     <input
       placeholder="Filtrar por Planeta..."
-      onChange={ filterByName }
+      onChange={ handleChange }
       data-testid="name-filter"
     />
   );

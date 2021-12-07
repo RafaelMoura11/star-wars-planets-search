@@ -5,8 +5,12 @@ import TableBody from './TableBody';
 function Table() {
   return (
     <>
-      <TableHead />
-      <TableBody />
+      <thead>
+        <TableHead />
+      </thead>
+      <tbody>
+        <TableBody />
+      </tbody>
     </>
   );
 }

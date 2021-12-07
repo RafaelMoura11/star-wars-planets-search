@@ -1,26 +1,15 @@
 import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
-import { columnFilter } from '../services';
+import { removeElementFromArray } from '../services';
+// import { columnFilter } from '../services';
 
 function ButtonFilter() {
-  const { objectWithStatesAndFunctions: { arrayOfColumns,
+  const { arrayOfColumns,
     setArrayOfColumns,
     filterByNumericValues,
     setFilterByNumericValues,
     allFilters,
-    setAllFilters,
-    data,
-    setData } } = useContext(MyContext);
-
-  const removeElementFromArray = (array, element) => (
-    array.filter((categoryToBeRemoved) => categoryToBeRemoved !== element)
-  );
-
-  const updateTable = (newArrayOfFilters) => {
-    newArrayOfFilters.forEach(({ column, comparison, value }) => (
-      setData(columnFilter(data, column, comparison, value))
-    ));
-  };
+    setAllFilters } = useContext(MyContext);
 
   const handleClick = () => {
     const newArrayOfCategories = removeElementFromArray(arrayOfColumns,
@@ -28,7 +17,6 @@ function ButtonFilter() {
     setArrayOfColumns(newArrayOfCategories);
     const newArrayOfFilters = [...allFilters, filterByNumericValues];
     setAllFilters(newArrayOfFilters);
-    updateTable(newArrayOfFilters);
     setFilterByNumericValues({
       column: newArrayOfCategories[0],
       comparison: 'maior que',

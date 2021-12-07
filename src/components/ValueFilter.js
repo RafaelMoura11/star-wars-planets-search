@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
 
 function ValueFilter() {
-  const { objectWithStatesAndFunctions: {
+  const {
     filterByNumericValues,
-    setFilterByNumericValues } } = useContext(MyContext);
+    setFilterByNumericValues } = useContext(MyContext);
 
   const handleChange = ({ target: { value } }) => {
     setFilterByNumericValues({ ...filterByNumericValues, value });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MyContext from './context/MyContext';
 import Table from './components/Table';
-import getPlanetsAPI, { columns } from './services';
+import getPlanetsAPI, { columns, handleFilterByName, updateTable } from './services';
 import FilterByNameInput from './components/FilterByNameInput';
 import ColumnFilter from './components/ColumnFilter';
 import ComparisonFilter from './components/ComparisonFilter';
@@ -10,9 +10,10 @@ import ButtonFilter from './components/ButtonFilter';
 import AllFilters from './components/AllFilters';
 
 function App() {
-  const [apiResponse, setApiResponse] = useState();
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [arrayOfColumns, setArrayOfColumns] = useState([...columns]);
+  const [filterByName, setFilterByName] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState({
     column: arrayOfColumns[0],
     comparison: 'maior que',
@@ -22,18 +23,25 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      setApiResponse(await getPlanetsAPI());
-      setData(await getPlanetsAPI());
+      const apiResponse = await getPlanetsAPI();
+      setFilteredData(apiResponse);
+      setData(apiResponse);
     }
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const searchingByName = handleFilterByName(data, filterByName);
+    const newTable = updateTable(allFilters, searchingByName);
+    setFilteredData(newTable);
+  }, [data, filterByName, allFilters]);
+
   const objectWithStatesAndFunctions = {
-    apiResponse,
-    setData,
-    data,
+    filteredData,
     arrayOfColumns, // Usar no select
     setArrayOfColumns, // Usar no button filtrar
+    filterByName,
+    setFilterByName,
     filterByNumericValues, // Usar nos 2 selects e no input
     setFilterByNumericValues, // Usar no button para resetar os valores
     allFilters,
@@ -41,14 +49,16 @@ function App() {
   };
 
   return (
-    <MyContext.Provider value={ { data, objectWithStatesAndFunctions } }>
+    <MyContext.Provider value={ objectWithStatesAndFunctions }>
       <FilterByNameInput />
       <ColumnFilter />
       <ComparisonFilter />
       <ValueFilter />
       <ButtonFilter />
       <AllFilters />
-      <Table />
+      <table>
+        <Table />
+      </table>
     </MyContext.Provider>
   );
 }

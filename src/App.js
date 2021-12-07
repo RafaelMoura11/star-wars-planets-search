@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import MyContext from './context/MyContext';
 import Table from './components/Table';
-import getPlanetsAPI, { columns, handleFilterByName, updateTable } from './services';
+import getPlanetsAPI, { columns, handleFilterByName, updateTable,
+  orderedArray } from './services';
 import FilterByNameInput from './components/FilterByNameInput';
 import ColumnFilter from './components/ColumnFilter';
 import ComparisonFilter from './components/ComparisonFilter';
 import ValueFilter from './components/ValueFilter';
 import ButtonFilter from './components/ButtonFilter';
 import AllFilters from './components/AllFilters';
+import ColumnSort from './components/ColumnSort';
 
 function App() {
   const [data, setData] = useState([]);
@@ -20,6 +22,7 @@ function App() {
     value: 0,
   });
   const [allFilters, setAllFilters] = useState([]);
+  const [order, setOrder] = useState({ column: 'name', sort: '' });
 
   useEffect(() => {
     async function fetchData() {
@@ -31,10 +34,14 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log(filteredData);
+  }, [filteredData])
+  useEffect(() => {
     const searchingByName = handleFilterByName(data, filterByName);
-    const newTable = updateTable(allFilters, searchingByName);
-    setFilteredData(newTable);
-  }, [data, filterByName, allFilters]);
+    const searchingByFilters = updateTable(allFilters, searchingByName);
+    const orderingByColumn = orderedArray(searchingByFilters, order);
+    setFilteredData(orderingByColumn);
+  }, [data, filterByName, allFilters, order]);
 
   const objectWithStatesAndFunctions = {
     filteredData,
@@ -46,6 +53,9 @@ function App() {
     setFilterByNumericValues, // Usar no button para resetar os valores
     allFilters,
     setAllFilters,
+    order,
+    setOrder,
+    columns,
   };
 
   return (
@@ -56,6 +66,7 @@ function App() {
       <ValueFilter />
       <ButtonFilter />
       <AllFilters />
+      <ColumnSort />
       <table>
         <Table />
       </table>

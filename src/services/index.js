@@ -50,3 +50,35 @@ export const updateTable = (allFilters, data) => {
   }
   return newTable;
 };
+
+const orderByName = (data, column) => (
+  [...data].sort((a, b) => {
+    const menosUm = -1;
+    if (a[column] < b[column]) {
+      return 1;
+    }
+    if (a[column] > b[column]) {
+      return menosUm;
+    }
+    return 0;
+  }).reverse()
+);
+
+export const orderedArray = (data, { column, sort }) => {
+  const seila = orderByName(data, column);
+  if (column === 'name') {
+    return seila;
+  }
+
+  seila.sort((a, b) => {
+    if (a[column] === 'unknown' || b[column] === 'unknown') {
+      return 0;
+    }
+    return b[column] - a[column];
+  });
+  if (sort === 'ASC') {
+    seila.reverse();
+  }
+  // console.log(JSON.stringify(seila));
+  return seila;
+};

@@ -24,7 +24,7 @@ export const removeElementFromArray = (array, element) => (
 );
 
 export const handleFilterByName = (data, filterByName) => (
-  data.filter(({ name }) => name.includes(filterByName))
+  data.filter(({ name }) => name.toLowerCase().includes(filterByName.toLowerCase()))
 );
 
 export const updateTable = (allFilters, data) => {

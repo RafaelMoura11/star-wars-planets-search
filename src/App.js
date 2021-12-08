@@ -42,12 +42,12 @@ function App() {
 
   const objectWithStatesAndFunctions = {
     filteredData,
-    arrayOfColumns, // Usar no select
-    setArrayOfColumns, // Usar no button filtrar
+    arrayOfColumns,
+    setArrayOfColumns,
     filterByName,
     setFilterByName,
-    filterByNumericValues, // Usar nos 2 selects e no input
-    setFilterByNumericValues, // Usar no button para resetar os valores
+    filterByNumericValues,
+    setFilterByNumericValues,
     allFilters,
     setAllFilters,
     order,

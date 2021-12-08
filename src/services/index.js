@@ -11,24 +11,12 @@ export const columns = ['population',
   'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
 
 export const columnFilter = (data, column, comparison, value) => {
-  if (comparison === 'maior que') {
-    return data.filter((element) => (
-      Number(element[column]) > Number(value)
-    ));
+  const comparator = {
+    'maior que': (element) => Number(element[column]) > Number(value),
+    'menor que': (element) => Number(element[column]) < Number(value),
+    'igual a': (element) => Number(element[column]) === Number(value),
   }
-
-  if (comparison === 'menor que') {
-    return data.filter((element) => (
-      Number(element[column]) < Number(value)
-    ));
-  }
-
-  if (comparison === 'igual a') {
-    return data.filter((element) => (
-      Number(element[column]) === Number(value)
-    ));
-  }
-  return data;
+    return data.filter((element) => comparator[comparison](element));
 };
 
 export const removeElementFromArray = (array, element) => (
@@ -44,10 +32,10 @@ export const updateTable = (allFilters, data) => {
     return data;
   }
   let newTable = [...data];
-  for (let index = 0; index <= allFilters.length - 1; index += 1) {
-    const { column, comparison, value } = allFilters[index];
+  allFilters.forEach(({ column, comparison, value }) => {
     newTable = columnFilter(newTable, column, comparison, value);
-  }
+  })
+
   return newTable;
 };
 
@@ -70,15 +58,10 @@ export const orderedArray = (data, { column, sort }) => {
     return seila;
   }
 
-  seila.sort((a, b) => {
-    if (a[column] === 'unknown' || b[column] === 'unknown') {
-      return 0;
-    }
-    return b[column] - a[column];
-  });
+  seila.sort((a, b) => b[column] - a[column]);
   if (sort === 'ASC') {
     seila.reverse();
   }
-  // console.log(JSON.stringify(seila));
+
   return seila;
 };

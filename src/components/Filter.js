@@ -4,9 +4,11 @@ import React from 'react';
 function Filter({ filter, handleClick }) {
   return (
     <div className="filter-card">
-      <p>{ filter.column }</p>
-      <p>{ filter.comparison }</p>
-      <p>{ filter.value }</p>
+      <div>
+        <p>{ filter.column }</p>
+        <p>{ filter.comparison }</p>
+        <p>{ filter.value }</p>
+      </div>
       <button
         type="button"
         name={ filter.column }

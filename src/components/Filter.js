@@ -3,7 +3,7 @@ import React from 'react';
 
 function Filter({ filter, handleClick }) {
   return (
-    <div data-testid="filter">
+    <div className="filter-card">
       <p>{ filter.column }</p>
       <p>{ filter.comparison }</p>
       <p>{ filter.value }</p>

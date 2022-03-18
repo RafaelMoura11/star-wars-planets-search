@@ -11,7 +11,11 @@ th, td {
   border-color: whitesmoke;
 }
 
-#filters {
+p {
+  margin: 0;
+}
+
+#top-section {
   background-color: rgb(22, 22, 22);
   display: flex;
   justify-content: space-around;
@@ -35,4 +39,13 @@ th, td {
   flex-direction: column;
   align-items: center;
   color: yellow;
+}
+
+#filters {
+  background-color: cyan;
+  display: flex;
+}
+
+.filter-card {
+  margin: 0px 5px;
 }

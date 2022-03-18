@@ -58,7 +58,7 @@ function App() {
 
   return (
     <MyContext.Provider value={ objectWithStatesAndFunctions }>
-      <section id="filters">
+      <section id="top-section">
         <FilterByNameInput />
         <div id="middle-filter-container">
           <h1>Star Wars</h1>

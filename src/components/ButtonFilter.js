@@ -27,7 +27,7 @@ function ButtonFilter() {
     <button
       type="button"
       onClick={ handleClick }
-      data-testid="button-filter"
+      disabled={ !arrayOfColumns.length }
     >
       Filtrar
 

@@ -6,7 +6,9 @@ function AllFilter() {
   const { arrayOfColumns,
     setArrayOfColumns,
     allFilters,
-    setAllFilters } = useContext(MyContext);
+    setAllFilters,
+    filterByNumericValues,
+    setFilterByNumericValues } = useContext(MyContext);
 
   const removeElementFromArray = (array, element) => (
     array.filter(({ column }) => column !== element)
@@ -16,10 +18,11 @@ function AllFilter() {
     setArrayOfColumns([...arrayOfColumns, name]);
     const newArrayOfFilters = removeElementFromArray(allFilters, name);
     setAllFilters(newArrayOfFilters);
+    setFilterByNumericValues({ ...filterByNumericValues, column: arrayOfColumns[0] })
   };
 
   return (
-    <div>
+    <div id="filters">
       { allFilters.map((filter, index) => (
         <Filter key={ index } filter={ filter } handleClick={ handleClick } />
       )) }

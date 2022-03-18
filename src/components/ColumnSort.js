@@ -14,9 +14,8 @@ function ColumnSort() {
   };
 
   return (
-    <div>
+    <div id="column-sort">
       <select
-        data-testid="column-sort"
         onChange={ handleChange }
         name="column"
       >
@@ -27,7 +26,6 @@ function ColumnSort() {
           type="radio"
           value="ASC"
           name="sort"
-          data-testid="column-sort-input-asc"
         />
         {' '}
         ASC
@@ -35,7 +33,6 @@ function ColumnSort() {
           type="radio"
           value="DESC"
           name="sort"
-          data-testid="column-sort-input-desc"
         />
         {' '}
         DESC
@@ -43,7 +40,6 @@ function ColumnSort() {
       <button
         type="button"
         onClick={ handleClick }
-        data-testid="column-sort-button"
       >
         Ordenar
 

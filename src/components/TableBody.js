@@ -6,7 +6,7 @@ function TableBody() {
   return (
     (filteredData.length ? filteredData.map((element) => (
       <tr key={ element.name }>
-        <td data-testid="planet-name">{element.name}</td>
+        <td>{element.name}</td>
         <td>{element.rotation_period}</td>
         <td>{element.orbital_period}</td>
         <td>{element.diameter}</td>
@@ -15,9 +15,9 @@ function TableBody() {
         <td>{element.terrain}</td>
         <td>{element.surface_water}</td>
         <td>{element.population}</td>
-        {element.films.map((film) => (
-          <td key={ film } href={ film }>{ film }</td>
-        ))}
+        <td>{element.films.map((film) => (
+          <p key={ film } href={ film }>{ film }</p>
+        ))}</td>
         <td>{element.created}</td>
         <td>{element.edited}</td>
         <td>{element.url}</td>

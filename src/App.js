@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './App.css'
 import MyContext from './context/MyContext';
 import Table from './components/Table';
 import getPlanetsAPI, { columns, handleFilterByName, updateTable,
@@ -57,16 +58,21 @@ function App() {
 
   return (
     <MyContext.Provider value={ objectWithStatesAndFunctions }>
-      <FilterByNameInput />
-      <ColumnFilter />
-      <ComparisonFilter />
-      <ValueFilter />
-      <ButtonFilter />
+      <section id="filters">
+        <FilterByNameInput />
+        <div id="middle-filter-container">
+          <h1>Star Wars</h1>
+          <div>
+            <ColumnFilter />
+            <ComparisonFilter />
+            <ValueFilter />
+            <ButtonFilter />
+          </div>
+        </div>
+        <ColumnSort />
+      </section>
       <AllFilters />
-      <ColumnSort />
-      <table>
-        <Table />
-      </table>
+      <Table />
     </MyContext.Provider>
   );
 }

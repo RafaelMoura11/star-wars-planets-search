@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import MyContext from '../context/MyContext';
 import { removeElementFromArray } from '../services';
-// import { columnFilter } from '../services';
 
 function ButtonFilter() {
   const { arrayOfColumns,

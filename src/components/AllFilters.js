@@ -18,7 +18,7 @@ function AllFilter() {
     setArrayOfColumns([...arrayOfColumns, name]);
     const newArrayOfFilters = removeElementFromArray(allFilters, name);
     setAllFilters(newArrayOfFilters);
-    setFilterByNumericValues({ ...filterByNumericValues, column: arrayOfColumns[0] })
+    setFilterByNumericValues({ ...filterByNumericValues, column: name })
   };
 
   return (
